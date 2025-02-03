@@ -162,6 +162,7 @@
             <h1>Complete Your Profile</h1>
             <form id="user-info-form">
                 <input type="text" id="name" placeholder="Full Name" required>
+                <input type="number" id="age" placeholder="Age" required>
                 <select id="blood-group" required>
                     <option value="1">Select Gender</option>
                     <option value="Male">Male</option>
@@ -246,6 +247,7 @@
     
             const userProfile = {
                 name: document.getElementById('name').value,
+                age: document.getElementById('age').value,
                 phone: document.getElementById('phone').value,
                 gender: document.getElementById('blood-group').value,
                 height: document.getElementById('height').value,
