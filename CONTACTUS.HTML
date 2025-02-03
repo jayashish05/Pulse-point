@@ -4,19 +4,145 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+.header {
+    background: linear-gradient(135deg, rgba(255, 68, 68, 0.9), rgba(255, 107, 107, 0.9)) !important;
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    box-shadow: 0 4px 20px rgba(255, 68, 68, 0.2);
+    width: 100%;
+    z-index: 900;
+}
+
+.header-container 
+{
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: slideInLeft 0.8s ease-out;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: grid;
+    animation: pulsate 1s infinite;
+    place-items: center;
+}
+
+.logo-text {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulsate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.logo:hover .logo-icon {
+    animation: pulsate 0.5s infinite;
+}
         body {
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
             background: url('BG.PNG') center/cover fixed;
             font-family: 'Arial Rounded MT Bold', sans-serif;
-            overflow: hidden;
+            overflow: hidxden;
         }
 
         body::before {
@@ -35,6 +161,8 @@
 
 
         .contact-container {
+            margin-top: 80px; /* Add space below header */
+        margin-bottom: 40px;
             background: rgba(255, 255, 255, 0.75) !important;
             border: 1px solid rgba(203, 203, 203, 0.3);
             border-radius: 20px;
@@ -169,6 +297,25 @@
     </style>
 </head>
 <body>
+    <header class="header">
+        <div class="header-container">
+          <div class="logo">
+            <div class="logo-icon">❤</div>
+            <div class="logo-text">PULSE POINT</div>
+          </div>
+          <nav class="nav-links">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Donors</a>
+            <a href="#" class="nav-link">Centers</a>
+            <a href="#" class="nav-link">Contact</a>
+          </nav>
+          <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </header>
     <div class="contact-container">
         <h2><i class="fas fa-hand-holding-water"></i> BloodConnect</h2>
         <form>
