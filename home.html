@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeStream - Blood Donation Network</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Original styles with only necessary image centering fixes */
+    * {
+        padding: 0px;
+        margin: 0px;
+    }
+    .main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .card-image {
+      display: block;
+      margin: 0 auto;
+      max-height: 300px;
+      width: auto;
+    }
+
+    /* Global Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Enhanced Header */
+    .header {
+      background: linear-gradient(135deg, #ff4444, #ff6b6b);
+      padding-top: 20px;
+      padding-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(255, 68, 68, 0.2);
+      width: 100%;
+      top: 0;
+      z-index: 900;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+
+    .logo-text {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Navigation */
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Hamburger Menu for Mobile */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Main Content */
+    .main {
+      max-width: 1280px;
+      margin: 120px auto 40px;
+      padding: 0 6%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+    }
+
+    /* Enhanced Card Design */
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 12px 24px rgba(255, 68, 68, 0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      border: 2px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 16px 32px rgba(255, 68, 68, 0.2);
+    }
+
+    .card-image-container {
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover .card-image {
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      padding: 2rem;
+      text-align: center;
+      position: relative;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, #ff4444, #ff6b6b);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+      margin-top: auto;
+    }
+
+    .card-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 68, 68, 0.4);
+    }
+
+    .footer {
+        background: 
+            linear-gradient(45deg, rgba(255,255,255,0.95) 25%, transparent 25%),
+            linear-gradient(-45deg, rgba(255,255,255,0.95) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.95) 75%),
+            linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.95) 75%),
+            #fff5f5;
+        background-size: 4px 4px;
+        padding: 4rem 0;
+        position: relative;
+        overflow: hidden;
+        animation: footerEntrance 1s ease-out;
+    }
+
+    @keyframes footerEntrance {
+        from { transform: translateY(100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: 0;
+        right: 0;
+        height: 50px;
+        background: linear-gradient(transparent, rgba(255,255,255,0.9));
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+
+    .footer-section {
+        text-align: left;
+        padding: 1rem;
+        opacity: 0;
+        animation: fadeInUp 0.8s forwards;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .footer-section:nth-child(1) { animation-delay: 0.2s; }
+    .footer-section:nth-child(2) { animation-delay: 0.4s; }
+    .footer-section:nth-child(3) { animation-delay: 0.6s; }
+
+    .footer-heading {
+        color: #ff4444;
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+
+    .footer-heading::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: #ff6b6b;
+    }
+
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .footer-link {
+        color: #666;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .footer-link::before {
+        content: '❤';
+        position: absolute;
+        left: 0;
+        color: #ff6b6b;
+        transition: transform 0.3s ease;
+    }
+
+    .footer-link:hover {
+        color: #ff4444;
+        transform: translateX(5px);
+    }
+
+    .footer-link:hover::before {
+        transform: scale(1.2);
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(255, 68, 68, 0.2);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .social-icon:hover {
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: 0 6px 16px rgba(255, 68, 68, 0.3);
+    }
+
+    .footer-bottom {
+        margin-top: 3rem;
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 68, 68, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon">❤</div>
+        <div class="logo-text">PULSE POINT</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#" class="nav-link">Home</a>
+        <a href="#" class="nav-link">Donors</a>
+        <a href="#" class="nav-link">Centers</a>
+        <a href="#" class="nav-link">Contact</a>
+      </nav>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="card">
+      <div class="card-image-container">
+        <img src="https://images.unsplash.com/photo-1615461065929-4f8ffed6ca40" 
+             alt="Find Donors" 
+             class="card-image">
+      </div>
+      <div class="card-content">
+        <a href="/search-donor" class="card-button">
+          <span>Find Donor</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image-container">
+        <img src="https://www.cidrap.umn.edu/sites/default/files/styles/article_detail/public/article/iStock-1399755086.jpg" 
+             alt="Become Donor" 
+             class="card-image">
+      </div>
+      <div class="card-content">
+        <a href="/donate" class="card-button">
+          <span>Donate Now</span>
+          <span>❤</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+ 
+<footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 class="footer-heading">Connect with Us</h3>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com" class="footer-link">LinkedIn</a>
+          <a href="https://www.instagram.com" class="footer-link">Instagram</a>
+          <a href="/faq" class="footer-link">FAQ</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-heading">Quick Links</h3>
+        <div class="footer-links">
+          <a href="/about" class="footer-link">About Us</a>
+          <a href="/services" class="footer-link">Our Services</a>
+          <a href="/contact" class="footer-link">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-heading">Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://www.linkedin.com" class="social-icon">🔗</a>
+          <a href="https://www.instagram.com" class="social-icon">📷</a>
+          <a href="https://twitter.com" class="social-icon">🐦</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p style="margin-top: 1rem; color: #666;">&copy; 2023 LifeStream. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      const menuToggle = document.querySelector('.menu-toggle');
+      navLinks.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
