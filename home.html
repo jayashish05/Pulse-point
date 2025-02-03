@@ -11,29 +11,6 @@
         padding: 0px;
         margin: 0px;
     }
-    .logo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  animation: 0.8s ease-out;
-}
-
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-}
-
-.logo-text {
-  color: white;
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
     .main {
       display: flex;
       flex-direction: column;
@@ -55,24 +32,36 @@
       width: auto;
     }
 
+
     /* Global Styles */
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fff5f5 0%, #ffe6e6 100%);
-      min-height: 100vh;
-      line-height: 1.6;
+      scroll-behavior: smooth;
+  background-image: 
+              url('colour.png') ;
+              position:relative;
+              object-fit: contain;
+              object-position: center;
+
     }
 
-    /* Enhanced Header */
+    @keyframes float {
+      from { transform: translate(0, 0); }
+      50% { transform: translate(-50px, 50px); }
+      to { transform: translate(0, 0); }
+    }
+    [data-scroll] {
+  transition: all 0.6s ease-out;
+}
     .header {
-      background: linear-gradient(135deg, #ff4444, #ff6b6b);
+      background: linear-gradient(135deg, rgba(255, 68, 68, 0.9), rgba(255, 107, 107, 0.9)) !important;
+  backdrop-filter: blur(10px);
       padding-top: 20px;
       padding-bottom: 20px;
       box-shadow: 0 4px 20px rgba(255, 68, 68, 0.2);
       width: 100%;
       top: 0;
       z-index: 900;
-      backdrop-filter: blur(10px);
+    
     }
 
     .header-container {
@@ -96,6 +85,7 @@
       background: rgba(255, 255, 255, 0.9);
       border-radius: 50%;
       display: grid;
+      animation: pulsate 1s infinite;
       place-items: center;
     }
 
@@ -103,9 +93,19 @@
       color: white;
       font-size: 1.8rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.1 px;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+    .logo:hover .logo-icon {
+  animation: pulsate 0.5s infinite;
+}
+    @keyframes pulsate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+
 
     /* Navigation */
     .nav-links {
@@ -183,7 +183,8 @@
 
     /* Enhanced Card Design */
     .card {
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(8px);
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 12px 24px rgba(255, 68, 68, 0.1);
@@ -194,9 +195,13 @@
       flex-direction: column;
       align-items: center;
     }
-
+    @keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+    }
     .card:hover {
-      transform: translateY(-10px);
+      animation: float 3s ease-in-out infinite;
       box-shadow: 0 16px 32px rgba(255, 68, 68, 0.2);
     }
 
@@ -209,6 +214,15 @@
       justify-content: center;
       align-items: center;
     }
+    .progress-bar {
+  height: 4px;
+  background: #ff4444;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  transition: width 0.3s ease-out;
+}
 
     .card-image {
       width: 100%;
@@ -269,19 +283,7 @@
         from { transform: translateY(100%); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
     }
-    @keyframes pulsate {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
 
-.logo-icon {
-  animation: pulsate 2s infinite;
-}
-
-.logo:hover .logo-icon {
-  animation: pulsate 0.5s infinite;
-}
     .footer::before {
         content: '';
         position: absolute;
@@ -488,6 +490,23 @@
       navLinks.classList.toggle('active');
       menuToggle.classList.toggle('active');
     }
+    document.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById('progressBar').style.width = scrolled + "%";
+  });
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    document.querySelector('body').style.backgroundPosition = `center ${scrolled * 0.5}px`;
+    
+    document.querySelectorAll('[data-scroll]').forEach(element => {
+      const speed = parseFloat(element.dataset.scroll);
+      element.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+  });
+});
   </script>
 </body>
 </html>
