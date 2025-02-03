@@ -11,6 +11,29 @@
         padding: 0px;
         margin: 0px;
     }
+    .logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  animation: 0.8s ease-out;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.logo-text {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
     .main {
       display: flex;
       flex-direction: column;
@@ -246,7 +269,19 @@
         from { transform: translateY(100%); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
     }
+    @keyframes pulsate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
 
+.logo-icon {
+  animation: pulsate 2s infinite;
+}
+
+.logo:hover .logo-icon {
+  animation: pulsate 0.5s infinite;
+}
     .footer::before {
         content: '';
         position: absolute;
