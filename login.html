@@ -314,14 +314,14 @@
                             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                             await updateProfile(userCredential.user, { displayName: name });
                             alert('Signup successful! Redirecting to login...');
-                            toggleForms(); // Switch to login form
+                            window.location.href = 'dashboard.html';
                         } catch (error) {
                             if (error.code === 'auth/email-already-in-use') {
                                 // Try to log in if account exists
                                 try {
                                     await signInWithEmailAndPassword(auth, email, password);
                                     alert('Welcome back! You\'ve been logged in.');
-                                    window.location.href = '/dashboard.html'; // Redirect to dashboard
+                                    window.location.href = 'home.html'; // Redirect to dashboard
                                 } catch (loginError) {
                                     alert('Account exists but password is incorrect');
                                 }
@@ -337,7 +337,7 @@
                         try {
                             await signInWithEmailAndPassword(auth, email, password);
                             alert('Login successful!');
-                            window.location.href = '/dashboard.html'; // Redirect to dashboard
+                            window.location.href = 'home.html'; // Redirect to dashboard
                         } catch (error) {
                             alert(`Login failed: ${error.message}`);
                         }
