@@ -1,4 +1,4 @@
-**Pulse Point - Next-Gen Blood Donation Platform**
+***Pulse Point - Next-Gen Blood Donation Platform***
 
 Pulse Point is a next-generation blood donation web app designed to efficiently connect blood donors and recipients. Built with React.js/Next.js and Firebase, the platform ensures seamless real-time donor matching, emergency request notifications, and an AI-powered compatibility system.
 
@@ -18,6 +18,8 @@ PWA (Progressive Web App) Implementation – Mobile-first experience for accessi
 
 🚀 Live Demo
 
+Experience Pulse Point as app: (https://github.com/Chethan616/PulsePoint.git)
+
 Experience Pulse Point in action: (https://jayashish05.github.io/Pulse-point/)
 
 🛠️ Tech Stack
@@ -29,4 +31,4 @@ Backend & Database: JS,NODE JS,Firebase (Firestore, Cloud Functions, Authenticat
 Hosting: Github hosting
 
 Other Integrations: Google Maps API
-//
+
