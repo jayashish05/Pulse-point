@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LifeStream - Blood Donation Network</title>
+  <title>pulsepoint- Blood Donation Network</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     /* Original styles with only necessary image centering fixes */
@@ -70,6 +70,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      
+ 
+
     }
 
     .logo {
@@ -283,6 +286,71 @@
         from { transform: translateY(100%); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
     }
+    profile-container {
+      position: relative;
+      display: inline-block;
+      margin-left: auto;
+    }
+
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #ff4444, #ff6b6b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .profile-name {
+      color: white;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .profile-section:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .profile-section:hover .profile-pic {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(255, 68, 68, 0.4);
+    }
+    .profile-dropdown {
+      display: none !important;
+    }
+
+    /* Adjust header layout */
+    .header-container {
+      position: relative;
+      padding: 0 2rem;
+    }
+
+    .nav-links {
+      margin-left: auto;
+      margin-right: 120px; /* Space for profile */
+    }
+
+/* Ensure header-container has position relative */
+
 
     .footer::before {
         content: '';
@@ -409,9 +477,14 @@
       <nav class="nav-links">
         <a href="#" class="nav-link">Home</a>
         <a href="#" class="nav-link">Donors</a>
-        <a href="#" class="nav-link">Centers</a>
-        <a href="#" class="nav-link">Contact</a>
+        <a href="donor.html" class="nav-link">Centers</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
+      <a href="profile.html" class="profile-section">
+        <div class="profile-pic">D</div>
+        <span class="profile-name">Donor123</span>
+      </a>
+       
       <div class="menu-toggle" onclick="toggleMenu()">
         <span></span>
         <span></span>
@@ -442,14 +515,13 @@
              class="card-image">
       </div>
       <div class="card-content">
-        <a href="/donate" class="card-button">
+        <a href="donor.html" class="card-button">
           <span>Donate Now</span>
           <span>❤</span>
         </a>
       </div>
     </div>
   </main>
-
  
 <footer class="footer">
     <div class="footer-content">
