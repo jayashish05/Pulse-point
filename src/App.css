@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: url("https://your-gif-link-here.com/background.gif") no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.container {
+  display: flex;
+  width: 1000px;
+  height: 600px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 0, 0, 0.2);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(255, 0, 0, 0.37);
+  overflow: hidden;
+  position: relative;
+}
+
+.form-section {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.6s ease-in-out;
+}
+
+.form-section.hidden {
+  transform: translateX(-100%);
+}
+
+.form-section h2 {
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.form-section p {
+  margin-bottom: 30px;
+  color: #eee;
+}
+
+.form-section form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-section form input {
+  width: 80%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.form-section form button {
+  width: 60%;
+  padding: 15px;
+  background: #e60000;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.form-section form button:hover {
+  background: #990000;
+}
+
+.toggle-section {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+}
+
+.toggle-section .left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 0, 0, 0.4);
+  padding: 40px;
+  text-align: center;
+  color: #fff;
+  transition: transform 0.6s ease-in-out;
+}
+
+.toggle-section .right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 0, 0, 0.5);
+  padding: 40px;
+  text-align: center;
+  color: #fff;
+  transition: transform 0.6s ease-in-out;
+}
+
+.container.active .toggle-section .left-panel {
+  transform: translateX(100%);
+}
+
+.container.active .toggle-section .right-panel {
+  transform: translateX(-100%);
+}

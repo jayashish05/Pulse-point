@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeStream - Blood Donation Network</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body {
+      scroll-behavior: smooth;
+  background-image: 
+              url('colour.png') ;
+              position:relative;
+              object-fit: contain;
+              object-position: center;
+
+    }
+
+    @keyframes float {
+      from { transform: translate(0, 0); }
+      50% { transform: translate(-50px, 50px); }
+      to { transform: translate(0, 0); }
+    }
+    [data-scroll] {
+  transition: all 0.6s ease-out;
+}
+    .header {
+      background: linear-gradient(135deg, rgba(255, 68, 68, 0.9), rgba(255, 107, 107, 0.9)) !important;
+  backdrop-filter: blur(10px);
+      padding-top: 20px;
+      padding-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(255, 68, 68, 0.2);
+      width: 100%;
+      top: 0;
+      z-index: 900;
+    
+    }
+
+    .header-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      animation: slideInLeft 0.8s ease-out;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: grid;
+      animation: pulsate 1s infinite;
+      place-items: center;
+    }
+
+    .logo-text {
+      color: white;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1 px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .logo:hover .logo-icon {
+  animation: pulsate 0.5s infinite;
+}
+    @keyframes pulsate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+
+
+    /* Navigation */
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      padding: 0.5rem 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    /* Donation Page Styles */
+    .donation-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1280px;
+      margin: 120px auto 40px;
+    }
+
+    .page-title {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 2.5rem;
+      color: #ff4444;
+      margin-bottom: 1rem;
+    }
+
+    #map {
+      height: 600px;
+      border-radius: 20px;
+      box-shadow: 0 12px 24px rgba(255, 68, 68, 0.1);
+    }
+
+    .blood-banks-list {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 1.5rem;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .blood-bank-card {
+      background: white;
+      border-radius: 15px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(255, 68, 68, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .blood-bank-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .location-button {
+      background: linear-gradient(135deg, #ff4444, #ff6b6b);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .directions-button {
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      cursor: pointer;
+      float: right;
+    }
+
+    .footer {
+      background: #fff5f5;
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .footer p {
+      color: #666;
+    }
+  </style>
+  <!-- Google Maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQJyXNxkwow5nFqWOk4NZWRmdckrCb-wo&callback=initMap" async defer></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon">❤</div>
+        <div class="logo-text">PULSE POINT</div>
+      </div>
+      <nav class="nav-links">
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="finder.html" class="nav-link">Donors</a>
+        <a href="#" class="nav-link">Centers</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Donation Page Content -->
+  <div class="donation-container">
+    <!-- Page Title -->
+    <h1 class="page-title">Find the Nearest Blood Donation Centers</h1>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Blood Banks List -->
+    <div class="blood-banks-list">
+      <button class="location-button" onclick="getLocation()">Use My Location</button>
+      <div id="bloodBanks">
+        <!-- Blood banks will be populated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2023 LifeStream. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let map;
+    let userLocation;
+    const bloodBanks = [
+      { name: "CMC Vellore Blood Bank", lat: 12.924574033051249, lng:  79.13518791081427, address: "Christian Medical College Vellore, IDA Scudder Rd, Vellore, Tamil Nadu 632004" },
+      { name: "VELLORE BLOOD CENTRE",lat: 12.961634746582968, lng: 79.14346160448179 ,address: "GROUND AND FIRST FLOOR, 2, 17th East Cross Rd, Suthanthira Ponvizha Nagar, Gandhi Nagar, Vellore, Tamil Nadu 632006" },
+      { name: "All India Blood Donors Association",lat:12.934223463794048, lat :79.13555546001892 ,address: "2nd Floor PLS Residency, Thottapalayam, Vellore, Tamil Nadu 632012"},
+      { name: "Red Cross",lat: 12.92217714648685, lng :79.13212223261421, address: "W4CJ+VQ9, SH 9, Balaji Nagar, Vellore, Tamil Nadu 632004"},
+      { name :"Indian Voluntary Blood Bank ",lat :13.10754345381007,lng : 80.29501749460088,  address : "12, S Madha Church St, Pudumanaikuppam, Royapuram, Chennai, Tamil Nadu 600013"},
+      { name : "National Voluntary Blood Centre" ,lat :13.126308183204127, lng :80.20292849469497 , address: "47, Ram Nagar 1st Cross St, Tirumalai nagar, Kolathur, Chennai, Tamil Nadu 600099"},
+      { name : "Lions Blood Bank", lat :13.069593137061176, lng : 80.2606014330471 , address : "SCHOOL OF OPTOMETRY, 130, Marshalls Rd, Egmore, Chennai, Tamil Nadu 600008"},
+      { name : "Annai teresa Blood Bank" ,lat :12.964857832407622, lng: 80.21098423252914 , address :"Bus stop, 946 1 st Floor, Bazaar Main Rd, Srinivasa Nagar, Ram Nagar South, Madipakkam, Chennai, Tamil Nadu 600091"},
+      {name : "Chiranjeevi Eye and Blood Bank" ,lat :17.41691799057767, lng :78.44546948068759 ,address : "No.8-2-293, 82/A, Road No. 1, Jawahar Colony, Jubilee Hills, Hyderabad, Telangana 500033"}
+  ];
+    // Initialize the map
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 40.7128, lng: -74.0060 }, // Default center (New York)
+        zoom: 13,
+      });
+    }
+
+    // Get user's location
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            userLocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            };
+            updateBloodBanks();
+            map.setCenter(userLocation);
+            new google.maps.Marker({
+              position: userLocation,
+              map: map,
+              title: "Your Location",
+              icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+              },
+            });
+          },
+          (error) => {
+            alert("Unable to retrieve your location. Please enable location services.");
+          }
+        );
+      } else {
+        alert("Geolocation is not supported by your browser.");
+      }
+    }
+
+    // Calculate distance between two coordinates
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371; // Earth radius in km
+      const dLat = (lat2 - lat1) * (Math.PI / 180);
+      const dLon = (lon2 - lon1) * (Math.PI / 180);
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) *
+          Math.cos(lat2 * (Math.PI / 180)) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return R * c; // Distance in km
+    }
+
+    // Update blood banks list and map markers
+    function updateBloodBanks() {
+      if (!userLocation) return;
+
+      // Sort blood banks by distance
+      const sortedBanks = bloodBanks
+        .map((bank) => ({
+          ...bank,
+          distance: calculateDistance(userLocation.lat, userLocation.lng, bank.lat, bank.lng),
+        }))
+        .sort((a, b) => a.distance - b.distance);
+
+      // Update the list
+      const container = document.getElementById("bloodBanks");
+      container.innerHTML = sortedBanks
+        .map(
+          (bank) => `
+        <div class="blood-bank-card">
+          <h3>${bank.name}</h3>
+          <p>${bank.address}</p>
+          <p>Distance: ${bank.distance.toFixed(2)} km</p>
+          <button class="directions-button" onclick="showDirections(${bank.lat},${bank.lng})">
+            Directions
+          </button>
+        </div>
+      `
+        )
+        .join("");
+
+      // Update map markers
+      sortedBanks.forEach((bank) => {
+        new google.maps.Marker({
+          position: { lat: bank.lat, lng: bank.lng },
+          map: map,
+          title: bank.name,
+        });
+      });
+    }
+
+    // Show directions to a blood bank
+    function showDirections(lat, lng) {
+      if (!userLocation) {
+        alert("Please enable location services to get directions.");
+        return;
+      }
+      window.open(
+        `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${lat},${lng}&travelmode=driving`
+      );
+    }
+  </script>
+</body>
+</html>
