@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeStream - Blood Donation Network</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="donor.css">
+  <!-- Google Maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQJyXNxkwow5nFqWOk4NZWRmdckrCb-wo&callback=initMap" async defer></script>
+</head>
+<body>
+  <div id="loading-screen">
+  <div id="lottie-animation" class="loading-animation"></div>
+</div>
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon">❤</div>
+        <div class="logo-text">PULSE POINT</div>
+      </div>
+      <nav class="nav-links">
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="finder.html" class="nav-link">Donors</a>
+        <a href="#" class="nav-link">Centers</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <a href="profile.html" class="profile-section">
+        <div class="profile-pic">D</div>
+        <span class="profile-name">Donor123</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Donation Page Content -->
+  <div class="donation-container">
+    <!-- Page Title -->
+    <h1 class="page-title">Find the Nearest Blood Donation Centers</h1>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Blood Banks List -->
+    <div class="blood-banks-list">
+      <button class="location-button" onclick="getLocation()">Use My Location</button>
+      <div id="bloodBanks">
+        <!-- Blood banks will be populated here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Pulse point. All rights reserved.</p>
+  </footer>
+
+  <script src="donor.js"></script>
+</body>
+</html>

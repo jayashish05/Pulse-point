@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation System - Pulse Point</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.1/lottie.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <link rel="stylesheet" href="finder.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div id="lottie-animation" class="loading-animation"></div>
+      </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">❤</div>
+                <div class="logo-text">PULSE POINT</div>
+            </div>
+            <nav class="nav-links">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Donors</a>
+                <a href="donor.html" class="nav-link">Centers</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <a href="profile.html" class="profile-section">
+                <div class="profile-pic">D</div>
+                <span class="profile-name">Donor123</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Request Form -->
+        <section class="request-card">
+            <h2 class="form__title">Emergency Blood Request</h2>
+            <form id="requestForm" class="request-form">
+                <div class="form-group">
+                    <label for="bloodGroup" class="form-label">Required Blood Group</label>
+                    <select id="bloodGroup" class="form-control" required>
+                        <option value="">Select Blood Type</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Emergency Message</label>
+                    <textarea id="message" class="form-control" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn">Find Donors & Send Alert</button>
+            </form>
+        </section>
+
+        <!-- Donor List -->
+        <section id="donorList" class="donor-list"></section>
+    </main>
+    <script src="finder.js"></script>
+</body>
+</html>
