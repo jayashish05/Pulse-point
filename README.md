@@ -18,7 +18,7 @@ PWA (Progressive Web App) Implementation – Mobile-first experience for accessi
 
 🚀 Live Demo
 
-Experience Pulse Point as app: (https://github.com/Chethan616/PulsePoint.git)
+Experience Pulse Point as app: (https://github.com/Chethan616/PulsePoint/releases/download/v1.0.0/Android-above_OS_13-app-arm64-v8a-release.apk)
 
 Experience Pulse Point in action: (https://jayashish05.github.io/Pulse-point/)
 
